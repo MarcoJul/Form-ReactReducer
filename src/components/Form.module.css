@@ -79,6 +79,11 @@ label.contentLabel {
   font-size: 2.4rem;
   font-weight: 700;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  background-color: #0d009e;
 }
 
 .showIcon {
