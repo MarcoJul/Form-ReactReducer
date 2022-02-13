@@ -1,8 +1,8 @@
 import { useState, useReducer } from "react";
 import { ReactComponent as Eye } from "../assets/Eye.svg";
 import { ReactComponent as EyeOff } from "../assets/Eye-off.svg";
-import { ReactComponent as ValidIcon } from "../assets/Success.svg";
-import { ReactComponent as ErrorIcon } from "../assets/Error.svg";
+
+import Validation from "./Validation";
 
 import classes from "./Form.module.css";
 
@@ -102,13 +102,10 @@ const Form = () => {
           Name
         </label>
         {contentState.nameValue !== "" && (
-          <div className={classes.validation}>
-            <ValidIcon />
-
-            {/* <span className={classes.errorMessage}>
-              Username already in use
-            </span> */}
-          </div>
+          <Validation
+            nameValue={contentState.nameValue}
+            message="Username already in use"
+          />
         )}
       </div>
       <div className={classes.field}>
@@ -119,18 +116,11 @@ const Form = () => {
         >
           Email
         </label>
-        {contentState.mailValue !== "" &&
-        contentState.mailValue.includes("@") ? (
-          <div className={classes.validation}>
-            <ValidIcon />
-          </div>
-        ) : (
-          <div className={classes.validation}>
-            <ErrorIcon />
-            <span className={classes.errorMessage}>
-              This is nota a valid email address
-            </span>
-          </div>
+        {contentState.mailValue !== "" && (
+          <Validation
+            mailValue={contentState.mailValue}
+            message="This is not a valid email address"
+          />
         )}
       </div>
       <div className={classes.field}>
@@ -146,12 +136,12 @@ const Form = () => {
         ) : (
           <EyeOff className={classes.showIcon} onClick={showPswHandler} />
         )}
-        <div className={classes.validation}>
-          <ErrorIcon />
-          <span className={classes.errorMessage}>
-            Password must be at least 8 digit
-          </span>
-        </div>
+        {contentState.pswValue !== "" && (
+          <Validation
+            pswValue={contentState.pswValue}
+            message="Password must be at least 8 digits"
+          />
+        )}
       </div>
 
       <div className={classes.field}>
@@ -176,10 +166,13 @@ const Form = () => {
             onClick={showConfirmPswHandler}
           />
         )}
-        <div className={classes.validation}>
-          <ErrorIcon className={classes.validationIcon} />
-          <span className={classes.errorMessage}>Doesn't match password </span>
-        </div>
+        {contentState.confirmPswValue !== "" && (
+          <Validation
+            pswValue={contentState.pswValue}
+            confirmPswValue={contentState.confirmPswValue}
+            message="Doesn't match password"
+          />
+        )}
       </div>
       <button className={classes.formButton}>Submit</button>
     </form>
