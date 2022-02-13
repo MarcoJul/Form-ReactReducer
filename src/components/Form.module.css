@@ -16,7 +16,6 @@
 .field {
   position: relative;
   display: flex;
-  flex-direction: column;
 }
 
 .field input {
@@ -27,6 +26,29 @@
   border-radius: 4px;
   border: 2px solid #d4d4d4;
   outline: none;
+  width: 100%;
+}
+
+.validation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 105%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 26rem;
+}
+
+.validationIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.errorMessage {
+  width: 23rem;
+  color: #ff0000;
+  font-size: 1.4rem;
+  font-weight: 400;
 }
 
 input:focus {

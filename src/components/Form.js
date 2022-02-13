@@ -1,8 +1,14 @@
 import { useState, useReducer } from "react";
 import { ReactComponent as Eye } from "../assets/Eye.svg";
 import { ReactComponent as EyeOff } from "../assets/Eye-off.svg";
+import { ReactComponent as ValidIcon } from "../assets/Success.svg";
+import { ReactComponent as ErrorIcon } from "../assets/Error.svg";
 
 import classes from "./Form.module.css";
+
+///////////////////////////////////
+////////   REDUCER FUNCTION    ////
+///////////////////////////////////
 
 const formReducer = (state, action) => {
   if (action.type === "NAME") {
@@ -40,6 +46,10 @@ const formReducer = (state, action) => {
   return { nameValue: "", mailValue: "", pswValue: "", confirmPswValue: "" };
 };
 
+///////////////////////////////////
+////////   COMPONENT      /////////
+///////////////////////////////////
+
 const Form = () => {
   const [showPassword, setShowPassword] = useState("password");
   const [showConfirmPassword, setShowConfirmPassword] = useState("password");
@@ -50,12 +60,20 @@ const Form = () => {
     confirmPswValue: "",
   });
 
+  ///////////////////////////////////
+  ////////   GENERIC BLUR      //////
+  ///////////////////////////////////
+
   const handleBlur = (input) => {
     dispatchContentState({
       type: input.target.id,
       val: input.target.value,
     });
   };
+
+  ///////////////////////////////////
+  ////////   SHOW PASSWORD     //////
+  ///////////////////////////////////
 
   const showPswHandler = () => {
     setShowPassword((previous) =>
@@ -68,6 +86,10 @@ const Form = () => {
     );
   };
 
+  ///////////////////////////////////
+  ////////   JSX CODE      //////////
+  ///////////////////////////////////
+
   return (
     <form className={classes.box}>
       <h2 className={classes.title}>Signup</h2>
@@ -79,6 +101,15 @@ const Form = () => {
         >
           Name
         </label>
+        {contentState.nameValue !== "" && (
+          <div className={classes.validation}>
+            <ValidIcon />
+
+            {/* <span className={classes.errorMessage}>
+              Username already in use
+            </span> */}
+          </div>
+        )}
       </div>
       <div className={classes.field}>
         <input type="email" id="MAIL" onBlur={handleBlur} />
@@ -88,6 +119,19 @@ const Form = () => {
         >
           Email
         </label>
+        {contentState.mailValue !== "" &&
+        contentState.mailValue.includes("@") ? (
+          <div className={classes.validation}>
+            <ValidIcon />
+          </div>
+        ) : (
+          <div className={classes.validation}>
+            <ErrorIcon />
+            <span className={classes.errorMessage}>
+              This is nota a valid email address
+            </span>
+          </div>
+        )}
       </div>
       <div className={classes.field}>
         <input type={showPassword} id="PASSWORD" onBlur={handleBlur} />
@@ -102,7 +146,14 @@ const Form = () => {
         ) : (
           <EyeOff className={classes.showIcon} onClick={showPswHandler} />
         )}
+        <div className={classes.validation}>
+          <ErrorIcon />
+          <span className={classes.errorMessage}>
+            Password must be at least 8 digit
+          </span>
+        </div>
       </div>
+
       <div className={classes.field}>
         <input
           type={showConfirmPassword}
@@ -125,6 +176,10 @@ const Form = () => {
             onClick={showConfirmPswHandler}
           />
         )}
+        <div className={classes.validation}>
+          <ErrorIcon className={classes.validationIcon} />
+          <span className={classes.errorMessage}>Doesn't match password </span>
+        </div>
       </div>
       <button className={classes.formButton}>Submit</button>
     </form>
