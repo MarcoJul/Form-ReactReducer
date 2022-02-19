@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/Form-ReactReducer/static/css/main.f5912a8b.css",
+    "main.js": "/Form-ReactReducer/static/js/main.f14a1423.js",
+    "static/js/787.4a8f4f28.chunk.js": "/Form-ReactReducer/static/js/787.4a8f4f28.chunk.js",
+    "static/media/Error.svg": "/Form-ReactReducer/static/media/Error.1f2ace7b4b0f646828040fac03c88023.svg",
+    "index.html": "/Form-ReactReducer/index.html",
+    "static/media/Success.svg": "/Form-ReactReducer/static/media/Success.c8fd48181717eef873259d3f7945e61f.svg",
+    "static/media/Eye-off.svg": "/Form-ReactReducer/static/media/Eye-off.cb746267b7668126abbf1d7d094b8deb.svg",
+    "static/media/Eye.svg": "/Form-ReactReducer/static/media/Eye.9367882f8a583c33408ba0ca7b1132fb.svg",
+    "main.f5912a8b.css.map": "/Form-ReactReducer/static/css/main.f5912a8b.css.map",
+    "main.f14a1423.js.map": "/Form-ReactReducer/static/js/main.f14a1423.js.map",
+    "787.4a8f4f28.chunk.js.map": "/Form-ReactReducer/static/js/787.4a8f4f28.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5912a8b.css",
+    "static/js/main.f14a1423.js"
+  ]
+}
