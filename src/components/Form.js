@@ -53,6 +53,7 @@ const formReducer = (state, action) => {
 const Form = () => {
   const [showPassword, setShowPassword] = useState("password");
   const [showConfirmPassword, setShowConfirmPassword] = useState("password");
+  const [formValidity, setFormValidity] = useState(false);
   const [contentState, dispatchContentState] = useReducer(formReducer, {
     nameValue: "",
     mailValue: "",
@@ -85,6 +86,8 @@ const Form = () => {
       previous === "password" ? "text" : "password"
     );
   };
+
+  const formValidityHandler = () => {};
 
   ///////////////////////////////////
   ////////   JSX CODE      //////////
@@ -174,7 +177,9 @@ const Form = () => {
           />
         )}
       </div>
-      <button className={classes.formButton}>Submit</button>
+      <button disabled={!formValidity} className={classes.formButton}>
+        Submit
+      </button>
     </form>
   );
 };
