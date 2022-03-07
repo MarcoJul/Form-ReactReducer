@@ -2,25 +2,14 @@ import { ReactComponent as ValidIcon } from "../assets/Success.svg";
 import { ReactComponent as ErrorIcon } from "../assets/Error.svg";
 
 import classes from "./Form.module.css";
-import { Fragment } from "react/cjs/react.production.min";
-
-const DUMMY_NAMES = [
-  "Neo",
-  "Trinity",
-  "Morpheus",
-  "Cypher",
-  "Tank",
-  "Apoc",
-  "Mouse",
-  "Switch",
-  "Dozer",
-];
+import { Fragment } from "react";
 
 const Validation = (props) => {
   let content;
-  if (props.mailValue) {
+
+  if (props.nameValue) {
     content =
-      props.mailValue !== "" && props.mailValue.includes("@") ? (
+      props.nameValue !== "" && !props.names.includes(props.nameValue) ? (
         <ValidIcon />
       ) : (
         <Fragment>
@@ -30,9 +19,9 @@ const Validation = (props) => {
       );
   }
 
-  if (props.nameValue) {
+  if (props.mailValue) {
     content =
-      props.nameValue !== "" && !DUMMY_NAMES.includes(props.nameValue) ? (
+      props.mailValue !== "" && props.mailValue.includes("@") ? (
         <ValidIcon />
       ) : (
         <Fragment>

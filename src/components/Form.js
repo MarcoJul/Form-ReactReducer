@@ -6,6 +6,18 @@ import Validation from "./Validation";
 
 import classes from "./Form.module.css";
 
+const DUMMY_NAMES = [
+  "Neo",
+  "Trinity",
+  "Morpheus",
+  "Cypher",
+  "Tank",
+  "Apoc",
+  "Mouse",
+  "Switch",
+  "Dozer",
+];
+
 ///////////////////////////////////
 ////////   REDUCER FUNCTION    ////
 ///////////////////////////////////
@@ -53,13 +65,14 @@ const formReducer = (state, action) => {
 const Form = () => {
   const [showPassword, setShowPassword] = useState("password");
   const [showConfirmPassword, setShowConfirmPassword] = useState("password");
-  const [formValidity, setFormValidity] = useState(false);
   const [contentState, dispatchContentState] = useReducer(formReducer, {
     nameValue: "",
     mailValue: "",
     pswValue: "",
     confirmPswValue: "",
   });
+
+  let formIsValid = false;
 
   ///////////////////////////////////
   ////////   GENERIC BLUR      //////
@@ -87,8 +100,18 @@ const Form = () => {
     );
   };
 
-  const formValidityHandler = () => {};
-
+  if (
+    contentState.nameValue !== "" &&
+    contentState.mailValue !== "" &&
+    contentState.pswValue !== "" &&
+    contentState.confirmPswValue !== "" &&
+    !DUMMY_NAMES.includes(contentState.nameValue) &&
+    contentState.mailValue.includes("@") &&
+    contentState.pswValue.length > 7 &&
+    contentState.pswValue === contentState.confirmPswValue
+  ) {
+    formIsValid = true;
+  }
   ///////////////////////////////////
   ////////   JSX CODE      //////////
   ///////////////////////////////////
@@ -106,6 +129,7 @@ const Form = () => {
         </label>
         {contentState.nameValue !== "" && (
           <Validation
+            names={DUMMY_NAMES}
             nameValue={contentState.nameValue}
             message="Username already in use"
           />
@@ -177,7 +201,7 @@ const Form = () => {
           />
         )}
       </div>
-      <button disabled={!formValidity} className={classes.formButton}>
+      <button disabled={!formIsValid} className={classes.formButton}>
         Submit
       </button>
     </form>
